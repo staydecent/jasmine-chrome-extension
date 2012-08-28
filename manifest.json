@@ -1,0 +1,45 @@
+{
+  "name": "Jasmine Chrome Extension",
+  "version": "0.0.1",
+  "description": "Inject Jasmine tests into active tabs.",
+  "icons": {
+    "128": "jasmine_favicon.png"
+  },
+
+  "page_action": {
+   "default_icon": "icon16.png",
+   "default_icon": "jasmine_favicon.png"
+  },
+  
+  "permissions": [
+    "https://*/",
+    "http://*/",
+    "tabs"
+  ],
+
+  "background": {
+    "scripts": ["background.js"]
+  },
+
+  "content_scripts" : [
+    {
+      "matches" : [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js" : [
+        "lib/jasmine.js",
+        "lib/jasmine.console_reporter.js",
+        "lib/jquery-1.7.2.min.js",
+        // You'll likely want to include JS files
+        // from an application you want to test
+        // "../external_app/path_to/file_to_test.js"
+        // as well as any requirements, ie. jQuery
+      ],
+      "run_at" : "document_idle",
+      "all_frames" : false
+    }
+  ],
+
+  "manifest_version": 2
+}
